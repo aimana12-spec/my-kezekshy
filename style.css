@@ -1,0 +1,351 @@
+:root {
+  --primary-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #db2777 100%);
+  --btn-gradient: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  --btn-hover: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  --bg-main: #f0f4f8; /* Жылы, жарық фон */
+  --glass-bg: rgba(255, 255, 255, 0.85); /* Ақшыл мөлдір картка фоны */
+  --glass-border: rgba(226, 232, 240, 0.8);
+  --text-main: #1e293b; /* Қою түсті оқылатын мәтін */
+  --text-muted: #64748b;
+  --accent-color: #2563eb;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding: 30px 15px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Фондағы жарқырау эффектисі (Glow) */
+.background-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.glow-1 {
+  width: 400px;
+  height: 400px;
+  background: #93c5fd;
+  top: -50px;
+  left: -50px;
+}
+
+.glow-2 {
+  width: 450px;
+  height: 450px;
+  background: #fbcfe8;
+  bottom: -50px;
+  right: -50px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Header */
+.main-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.logo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  color: #1d4ed8;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.main-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  margin-bottom: 25px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.icon-box {
+  font-size: 24px;
+  background: rgba(37, 99, 235, 0.08);
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.card-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.card-header p {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* Presets */
+.presets-wrapper {
+  margin-bottom: 20px;
+  background: rgba(241, 245, 249, 0.7);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.presets-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.preset-btn {
+  background: white;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preset-btn:hover {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #1d4ed8;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #334155;
+}
+
+.required {
+  color: #db2777;
+}
+
+.api-link {
+  color: var(--accent-color);
+  font-size: 11px;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 12px 12px 12px 38px;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  color: #0f172a;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.demo-btn {
+  position: absolute;
+  right: 6px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* Buttons */
+.primary-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--btn-gradient);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+  transition: all 0.2s;
+}
+
+.primary-btn:hover {
+  background: var(--btn-hover);
+  transform: translateY(-2px);
+}
+
+/* Tabs */
+.tabs-header {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px;
+  background: white;
+  border: 1px solid #cbd5e1;
+  color: var(--text-muted);
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.card-action-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.copy-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.output-box {
+  background: #f8fafc;
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  line-height: 1.7;
+  font-size: 14px;
+  white-space: pre-wrap;
+  color: #1e293b;
+}
+
+.action-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.secondary-btn {
+  background: white;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .tabs-header {
+    flex-direction: column;
+  }
+}

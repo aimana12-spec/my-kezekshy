@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мектеп Іс-шарасының AI Ассистенті</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+  <div class="background-glow glow-1"></div>
+  <div class="background-glow glow-2"></div>
+
+  <div class="container">
+    <header class="main-header">
+      <div class="logo-badge">
+        <span class="pulse-icon">✨</span> AI Powered
+      </div>
+      <h1>Мектеп Іс-шарасының AI Ассистенті</h1>
+      <p class="subtitle">Мұғалімдер мен ұйымдастырушыларға арналған ақылды, жылдам әрі заманауи генератор</p>
+    </header>
+
+    <main>
+      <!-- Енгізу формасы -->
+      <section class="glass-card input-card">
+        <div class="card-header">
+          <div class="icon-box">📋</div>
+          <div>
+            <h2>Іс-шара параметрлері</h2>
+            <p>Қажетті мәліметтерді енгізіңіз немесе дайын шаблондарды таңдаңыз</p>
+          </div>
+        </div>
+
+        <!-- Тез таңдау шаблондары -->
+        <div class="presets-wrapper">
+          <label class="section-label">⚡ Жылдам шаблондар:</label>
+          <div class="presets-list">
+            <button class="preset-btn" onclick="applyPreset('Тілдер күні', '7-8 сыныптар', 45)">🇰🇿 Тілдер күні</button>
+            <button class="preset-btn" onclick="applyPreset('Алтын күз балы', '9-11 сыныптар', 90)">🍂 Алтын күз балы</button>
+            <button class="preset-btn" onclick="applyPreset('Наурыз мейрамы', 'Барлық сыныптар', 60)">🌿 Наурыз мейрамы</button>
+            <button class="preset-btn" onclick="applyPreset('Спорттық эстафета', '5-6 сыныптар', 60)">🏆 Спорттық эстафета</button>
+          </div>
+        </div>
+
+        <form id="eventForm" onsubmit="event.preventDefault(); generateAll();">
+          <div class="form-group">
+            <label for="apiKey">Gemini API Key <span class="required">*</span> <a href="https://aistudio.google.com" target="_blank" class="api-link">(Кілтті тегін алу)</a></label>
+            <div class="input-with-icon">
+              <span class="field-icon">🔑</span>
+              <input type="password" id="apiKey" placeholder="AI Studio-дан алған API кілтті қойыңыз" required>
+              <button type="button" class="demo-btn" onclick="fillDemoKey()">Demo</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="eventName">Іс-шара атауы мен тақырыбы <span class="required">*</span></label>
+            <div class="input-with-icon">
+              <span class="field-icon">🎯</span>
+              <input type="text" id="eventName" placeholder="Мысалы: Тіл – халықтың асыл қазынасы" required>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="grade">Сынып / Қатысушылар <span class="required">*</span></label>
+              <div class="input-with-icon">
+                <span class="field-icon">👥</span>
+                <input type="text" id="grade" placeholder="Мысалы: 7-сыныптар" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="duration">Уақыты (минут) <span class="required">*</span></label>
+              <div class="input-with-icon">
+                <span class="field-icon">⏱️</span>
+                <input type="number" id="duration" placeholder="Мысалы: 45" min="10" max="240" required>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" id="generateBtn" class="primary-btn">
+            <span class="btn-text">🚀 AI Жоспарды дайындау</span>
+            <span class="btn-loader hidden">⏳ Генерация жүруде...</span>
+          </button>
+        </form>
+      </section>
+
+      <!-- Нәтижелер бөлімі -->
+      <section id="resultsSection" class="results-wrapper hidden">
+        
+        <!-- Навигациялық табтар -->
+        <div class="tabs-header">
+          <button class="tab-btn active" onclick="switchTab('scenarioTab')">📝 Сценарий & Кезеңдер</button>
+          <button class="tab-btn" onclick="switchTab('budgetTab')">📊 Бюджет & Чеклист</button>
+          <button class="tab-btn" onclick="switchTab('promoTab')">📱 SMM & Хабарландыру</button>
+        </div>
+
+        <!-- 1-Таб: Сценарий -->
+        <div id="scenarioTab" class="tab-content active glass-card">
+          <div class="card-action-header">
+            <h3>📝 Іс-шара Сценарийі мен Кезеңдері</h3>
+            <button class="copy-btn" onclick="copyContent('scenarioResult')">📋 Көшіріп алу</button>
+          </div>
+          <div id="scenarioResult" class="output-box"></div>
+        </div>
+
+        <!-- 2-Таб: Бюджет -->
+        <div id="budgetTab" class="tab-content glass-card">
+          <div class="card-action-header">
+            <h3>📊 Ресурстар, Құрал-жабдықтар & Бюджет</h3>
+            <button class="copy-btn" onclick="copyContent('budgetResult')">📋 Көшіріп алу</button>
+          </div>
+          <div id="budgetResult" class="output-box"></div>
+        </div>
+
+        <!-- 3-Таб: Хабарландыру -->
+        <div id="promoTab" class="tab-content glass-card">
+          <div class="card-action-header">
+            <h3>📱 Instagram & Мессенджер Хабарландыруы</h3>
+            <button class="copy-btn" onclick="copyContent('promoResult')">📋 Көшіріп алу</button>
+          </div>
+          <div id="promoResult" class="output-box"></div>
+        </div>
+
+        <!-- Басып шығару батырмасы -->
+        <div class="action-footer">
+          <button class="secondary-btn" onclick="window.print()">🖨️ PDF / Басып шығару</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
